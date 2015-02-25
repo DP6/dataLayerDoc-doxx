@@ -13,12 +13,12 @@ A pasta *node_modules* propositalmente foi mantida devido a resquitições de ve
 **[Node.js](http://nodejs.org/download/)**
 
 
-### Estrutura e documentos
+### Estrutura e Documentos
 
 Utilize a pasta `exemple` como referência. 
 
-Cada arquivo JS deve conrrespoder a um grupo de páginas da camada de dados.
-Todo projeto deve ter um `README.md` com as informações do cliente e do projeto, este será a página inicial da documentação.
+Cada arquivo JS deve corresponder a um grupo de páginas da camada de dados.
+Todo projeto deve conter um `README.md` com as informações do cliente e do projeto, este será a página inicial da documentação.
 
 
 
@@ -120,7 +120,6 @@ $ doxx --help
 
     -h, --help                                 output usage information
     -V, --version                              output the version number
-    -r, --raw                                  output "raw" comments, leaving the markdown intact
     -d, --debug                                output parsed comments for debugging
     -t, --title <string>                       The title for the page produced
     -s, --source <source>                      The folder which should get parsed
