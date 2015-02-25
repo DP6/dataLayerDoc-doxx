@@ -2,7 +2,9 @@ mixin iForSymbolType(symbol)
   i(class=["alert", "alert-"+(symbol.type === "function" || symbol.type === "method" ? "info":"success")])
 
 mixin labelForSymbolType(symbol)
-  div(class=["label", "label-"+(symbol.gtype === "function" || symbol.gtype === "method" ? "info":"success"), "radius", "ctx-type"])= symbol.ctx.type
+  // div(class=["label", "label-"+(symbol.gtype === "function" || symbol.gtype === "method" ? "info":"success"), "radius", "ctx-type"])= symbol.ctx.type
+  div(class=["label", "label-"+(symbol.scope === "all" || symbol.scope === "all " ? "warning":"success"), "radius", "ctx-type"])= symbol.scope + " pages"
+
 
 doctype html
 html
@@ -45,13 +47,14 @@ html
       }
 
       code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
-      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
+      div.description {margin: 14px 0; padding-top: 14px; }
       .tags {}
       .ctx-type {
         display:inline-block;
         margin-right:0.5em;
         //- float:right; margin-top:8px
       }
+      pre.language-javascript {border-bottom:1px solid #444;}
 
       footer iframe{vertical-align:middle;}
 
@@ -59,9 +62,10 @@ html
     div.navbar.navbar-inverse.navbar-fixed-top
       div.navbar-inner
         div.container
-          a.brand Doxx
+          a.brand W3C Customer Experience Digital Data Acquisition 1.0
           div.nav-collapse.collapse
-            ul.nav.pull-right.sponsored
+            div.pull-right(style="color: white; margin-top: 10px;") www.dp6.com.br
+
 
 
     header.jumbotron.subhead#overview
@@ -75,18 +79,18 @@ html
           ul.nav.nav-list.bs-docs-sidenav.affix-top
             each file in files
               li(class=(file.name !== currentName ? "":"active"))
-                a(href=file.relName) #{file.name}
+                a(href=file.relName) #{(file.name).replace(".js", "")}
 
           .scrollspy
             ul.nav.nav-list.bs-docs-sidenav.affix-top
               each symbol in symbols
                 li
                   if name === currentName
-                    a(href='#'+symbol.name)
+                    a(href='#'+symbol.name.replace(".", "-"))
                       mixin iForSymbolType(symbol)
                       span #{symbol.name}
                   else
-                    a(href=symbol.targetFile+'#'+symbol.name)
+                    a(href=symbol.targetFile+'#'+symbol.name.replace(".", "-"))
                       mixin iForSymbolType(symbol)
                       span #{symbol.name}
 
@@ -94,27 +98,27 @@ html
           if locals.readme
             section(id=name) !{readme}
           each symbol in dox
-            if symbol.ctx.name
-              section(id=symbol.ctx.name)
-                  h1= symbol.ctx.name
+            if symbol.ctx.string
+              section(id=symbol.ctx.string.replace(".", "-"))
+                  h1= symbol.ctx.string
                   h5.subheader
-                  if !symbol.gtype && symbol.type
-                    p
-                      div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                  else
-                    p
-                      mixin labelForSymbolType(symbol)
-                      if symbol.ctx.string
-                        span= symbol.ctx.string
-                      if symbol.return
-                        |  ->
-                        span= symbol.return
+                  //if !symbol.gtype && symbol.type
+                  //  p
+                  //    div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                  //else
+                  p
+                    mixin labelForSymbolType(symbol)
+                    if symbol.path
+                      code= symbol.path
+                    if symbol.return
+                      |  ->
+                      span= symbol.return
 
             if symbol.hasParams
               table.table.table-bordered.table-striped
                 thead
                   tr
-                    th(style="width:20%") Option name
+                    th(style="width:20%") Key name
                     th(style="width:20%") Type
                     th Description
                 tbody
@@ -123,12 +127,7 @@ html
                       tr
                         td= tag.name
                         td= tag.types
-                        td!= tag.description
-                    if tag.type == 'return'
-                      tr
-                        td= tag.type
-                        td= tag.types
-                        td= tag.Description
+                        td= tag.description
 
             .description !{symbol.description.full} !{symbol.description.extra}
             if symbol.code
@@ -136,21 +135,18 @@ html
                 code.language-javascript
                   = symbol.code
             if symbol.jsfiddle
-              h5 jsFiddle
+              h5 Example
               p
                 iframe(width="100%", height="300", src=symbol.jsfiddle , allowfullscreen="allowfullscreen", frameborder="0")
 
     footer.footer
       div.container
-        p Documentation generated with 
+        p Developed by 
+          a(href="http://www.dp6.com.br/") DP6
+          |, based W3C Customer Experience Digital Data Acquisition 1.0 
+        small Documentation generated with 
           a(href="https://github.com/FGRibreau/doxx") Doxx 
-          |  created by 
-          a.twitter-follow-button(href='https://twitter.com/FGRibreau',data-show-count='false') Francois-Guillaume Ribreau 
-        p Doxx is sponsored by 
-          a.bringr(href='http://bringr.net/?btt', title="Outil d'analyse des réseaux sociaux") Bringr 
-          |  and 
-          a.redsmin(href='https://redsmin.com/?btt', title="Full Redis GUI") Redsmin
-        p Theme borrowed from Twitter Bootstrap
+          | created by Francois-Guillaume Ribreau | Doxx is sponsored by Bringr and Redsmin | Theme borrowed from Twitter Bootstrap
 
     script(src="http://platform.twitter.com/widgets.js")
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js")
