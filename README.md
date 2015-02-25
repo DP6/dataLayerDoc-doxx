@@ -1,3 +1,49 @@
+# DataLayerDoc 
+
+Projeto adptado para gerar docuemntação de camada de dados.
+A pasta *node_modules* prositalmente foi mantida devido a resquitições de versão e compatibilidade.
+
+
+## Uso
+
+
+### Dependência
+
+*Node.js*(http://nodejs.org/download/)
+
+
+### Linha de Comando
+
+* Utilize a pasta `exemple` como referência
+* Dentro do diretório do `README.md` executar:
+
+
+```
+$ [???]/dataLayerDoc-doxx/bin/doxx --source ./source/ --target [???/direto-destino]
+```
+
+Exemplo:
+
+projeto/
+    README.md
+    source/
+        home.js
+        ...
+    doc/
+
+
+```
+projeto $ ~/dev/dataLayerDoc-doxx/bin/doxx --source ./source/ --target ./doc
+
+```
+
+
+
+
+
+
+README original:
+
 # Doxx [![Build Status](https://travis-ci.org/FGRibreau/doxx.png)](https://travis-ci.org/FGRibreau/doxx) [![Gittip](http://badgr.co/gittip/fgribreau.png)](https://www.gittip.com/fgribreau/) [![Deps](https://david-dm.org/FGRibreau/doxx.png)](https://david-dm.org/FGRibreau/doxx)
 
 Use [dox](https://github.com/visionmedia/dox) to automatically generate beautiful html documentation. **Doxx is a total refactoring of [dox-foundation](https://github.com/punkave/dox-foundation/)**.
