@@ -1,7 +1,8 @@
 # DataLayerDoc 
 
-Projeto adptado para gerar docuemntação de camada de dados.
-A pasta *node_modules* prositalmente foi mantida devido a resquitições de versão e compatibilidade.
+Projeto adptado para gerar documentações de camada de dados.
+
+A pasta *node_modules* propositalmente foi mantida devido a resquitições de versão e compatibilidade.
 
 
 ## Uso
@@ -9,28 +10,42 @@ A pasta *node_modules* prositalmente foi mantida devido a resquitições de vers
 
 ### Dependência
 
-*Node.js*(http://nodejs.org/download/)
+**[Node.js](http://nodejs.org/download/)**
+
+
+### Estrutura e documentos
+
+Utilize a pasta `exemple` como referência. 
+
+Cada arquivo JS deve conrrespoder a um grupo de páginas da camada de dados.
+Todo projeto deve ter um `README.md` com as informações do cliente e do projeto, este será a página inicial da documentação.
+
 
 
 ### Linha de Comando
 
-* Utilize a pasta `exemple` como referência
-* Dentro do diretório do `README.md` executar:
+Estando dentro do diretório do arquivo `README.md` do projeto executar:
 
 
 ```
 $ [???]/dataLayerDoc-doxx/bin/doxx --source ./source/ --target [???/direto-destino]
 ```
 
-Exemplo:
 
+#### Exemplo
+
+para um projeto como este:
+
+```
 projeto/
     README.md
     source/
         home.js
         ...
     doc/
+```
 
+executar:
 
 ```
 projeto $ ~/dev/dataLayerDoc-doxx/bin/doxx --source ./source/ --target ./doc
@@ -40,9 +55,8 @@ projeto $ ~/dev/dataLayerDoc-doxx/bin/doxx --source ./source/ --target ./doc
 
 
 
+**README original**
 
-
-README original:
 
 # Doxx [![Build Status](https://travis-ci.org/FGRibreau/doxx.png)](https://travis-ci.org/FGRibreau/doxx) [![Gittip](http://badgr.co/gittip/fgribreau.png)](https://www.gittip.com/fgribreau/) [![Deps](https://david-dm.org/FGRibreau/doxx.png)](https://david-dm.org/FGRibreau/doxx)
 
